@@ -18,3 +18,17 @@ Simply removing hardcoded wiring from your app and using a framework to inject d
 
 
 ![What is Spring](media/what_is_spring.png) 
+
+
+The Problems solved by Spring
+------------------------------------
+1) Testability
+2) Maintainability
+3) Scalablilty
+4) Complexity
+5) <b>Business Focus</b>
+
+Lets take an example how <b>Business Focus</b> is acheived:
+
+![Business Focus](media/business_focus.png) 
+ 
