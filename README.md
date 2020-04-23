@@ -1,5 +1,5 @@
 # Spring Fundamentals
-This practice project follows Pluralsight course https://app.pluralsight.com/player?course=spring-framework-spring-fundamentals 
+This practice project follows [Pluralsight course](https://app.pluralsight.com/player?course=spring-framework-spring-fundamentals )
 
 Topics Covered
 --------------
