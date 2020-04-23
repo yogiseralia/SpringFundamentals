@@ -248,7 +248,7 @@ Enabling Spring in Application
 
 Here is the code to show you how is Spring enabled? - 
 
-This is Application class using the AnnotationConfigApplicationContext class to do the reading of annotation applied in whole app and make depedency graph which is then used in application. 
+This is Application class using the **AnnotationConfigApplicationContext** class to do the reading of annotation applied in whole app and make depedency graph which is then used in application. 
 ````java
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
