@@ -49,3 +49,14 @@ Let's take a look -
 
 ![Business Focus Revisited](media/business_focus_revisited.png)
  
+This is the usage of template method pattern of Spring. But take a look of how concise a code is now.
+
+
+
+How it Works ?
+--------------
+
+Spring can be considered as 
+1) <b>POJOe</b> (Plain Old Java Object). 
+2) <b>HashMap - ApplicationContext</b> - is the configured application container where all the application depedencies wired up at it.
+3) Can also be used as <b>Registry</b>
