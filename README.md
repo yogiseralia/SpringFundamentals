@@ -105,17 +105,17 @@ then Java configuration was introduced and now at latest everything is available
 @Configuration
 --------------
 
-applicationContext is replaced by <b>@Configuration</b>
+applicationContext is replaced by **@Configuration**
 
-<b>@Configuration</b> is applied at class level
+**@Configuration** is applied at class level
 
-Spring Bean is defined by <b>@Bean</b> 
+Spring Bean is defined by **@Bean**
 
-<b>@Bean</b> is applied at method level
+**@Bean** is applied at method level
 
 For e.g. - 
 
-```
+````java
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -127,4 +127,61 @@ public class AppConfig {
         return new SpeakerServiceImpl();
     }
 }
-```
+````
+
+
+**NOTE** - All beans created via **@Bean** annotation created only once, hence also called as **Singleton**  
+ 
+Setter Injection
+----------------
+ Simple as a method call.
+
+ A lot "Mystery" of injection goes away when using it.
+
+ Setter injection simply calling a setter on a bean. 
+ 
+ For e.g. - 
+
+AppConfig.java -  
+ ````java
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+
+    @Bean(name = "speakerService")
+    public SpeakerService getSpeakerService() {
+        SpeakerServiceImpl speakerService = new SpeakerServiceImpl();
+        speakerService.setSpeakerRepository(getSpeakerRepository());
+        return speakerService;
+    }
+
+    @Bean(name = "speakerRepository")
+    public SpeakerRepository getSpeakerRepository() {
+        return new HibernateSpeakerRepositoryImpl();
+    }
+}
+
+````
+
+SpeakerService using setter method for SpeakerRepository.java
+````java
+
+public class SpeakerServiceImpl implements SpeakerService {
+
+    private SpeakerRepository speakerRepository;
+
+    @Override
+    public List<Speaker> findAll() {
+        return speakerRepository.findAll();
+    }
+
+    // this setter used in above code snippet to resolve the dependency
+    public void setSpeakerRepository(SpeakerRepository speakerRepository) {
+        this.speakerRepository = speakerRepository;
+    }
+}
+```` 
+ 
