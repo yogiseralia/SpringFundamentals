@@ -77,3 +77,14 @@ Demo
 -----
 Lets have a Demo '[Confrenence App](https://github.com/yogiseralia/SpringDemoConfrenceApp)' to understand what it is when spring is not used? 
 And later how is this app configured with Spring?
+
+
+Configuration
+-------------
+Spring is about removing cofiguration from code. 
+Why configuration is bad? because 
+1) it makes things brittle, 
+2) of Testing Difficulties.
+
+Now we will use Spring to do configurations with three approach using demo -
+![Configuration](media/configuration.png) 
