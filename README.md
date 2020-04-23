@@ -31,4 +31,21 @@ The Problems solved by Spring
 Lets take an example how <b>Business Focus</b> is acheived:
 
 ![Business Focus](media/business_focus.png) 
+
+The Solution 
+------------
+
+1) Configuration - remove config. code or loopkup code
+2) Focus - how I handle exception? these things are resolved
+3) Testing
+4) Annotation or XML Based
+5) Interface Based - makes things easier to test.
+
+
+Let's revisit the Business Focus Problem, and we can see that for fetching the details of a Car we need to write whole connection opening, sql query execution, collect result from resultSet and finally close the connection.
+Now for simple business use case for fetching details of Car remaining code considered as boilerplate.
+
+Let's take a look - 
+
+![Business Focus Revisited](media/business_focus_revisited.png)
  
