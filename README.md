@@ -268,3 +268,6 @@ public class Application {
 }
 
 ````
+
+
+Here is the full source code of this app - **[SOURCE CODE](https://github.com/yogiseralia/SpringDemoConferenceApp-JavaCofig)** 
