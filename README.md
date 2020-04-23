@@ -167,7 +167,7 @@ public class AppConfig {
 
 ````
 
-SpeakerService using setter method for SpeakerRepository.java
+SpeakerServiceImpl using setter method for SpeakerRepository interface
 ````java
 
 public class SpeakerServiceImpl implements SpeakerService {
@@ -186,3 +186,58 @@ public class SpeakerServiceImpl implements SpeakerService {
 }
 ```` 
  
+ 
+ Constructor Injection
+ ---
+ 
+ Just like setter injection. 
+ 
+ 
+ For e.g. - 
+
+SpeakerServiceImpl with constructor parameter as SpeakerRepository 
+ ````java
+public class SpeakerServiceImpl implements SpeakerService {
+
+    private SpeakerRepository speakerRepository;
+
+    // added to perform constructor injection
+    public SpeakerServiceImpl(SpeakerRepository speakerRepository){
+        this.speakerRepository = speakerRepository;
+    }
+
+    @Override
+    public List<Speaker> findAll() {
+        return speakerRepository.findAll();
+    }
+
+    // this setter used in above code snippet to resolve the dependency
+    public void setSpeakerRepository(SpeakerRepository speakerRepository) {
+        this.speakerRepository = speakerRepository;
+    }
+}
+````
+
+And AppConfig now looks like - 
+
+````java
+@Configuration
+public class AppConfig {
+
+    @Bean(name = "speakerService")
+    public SpeakerService getSpeakerService() {
+//      usage of constructor injection
+        SpeakerServiceImpl speakerService = new SpeakerServiceImpl(getSpeakerRepository());
+
+//        usage of setter injection
+//        SpeakerServiceImpl speakerService = new SpeakerServiceImpl();
+//        speakerService.setSpeakerRepository(getSpeakerRepository());
+        return speakerService;
+    }
+
+    @Bean(name = "speakerRepository")
+    public SpeakerRepository getSpeakerRepository() {
+        return new HibernateSpeakerRepositoryImpl();
+    }
+}
+````
