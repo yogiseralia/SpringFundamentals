@@ -1,13 +1,16 @@
 # Spring Fundamentals
 This practice project follows Pluralsight course https://app.pluralsight.com/player?course=spring-framework-spring-fundamentals 
 
-#Topics Covered
+Topics Covered
+--------------
 
 1) Java Configuration
 2) Autowiring
 3) Advanced Bean Configuration
 
-# What is Spring ?
+What is Spring ?
+----------------
+
 Started with <b>Inversion of Control Container</b>, this technique is often considered as <b>Dependency Injection</b>.
 It was conceived to reduce or replace some complex configuration of earlier JavaEE.
 Spring started to reduce usage of EJBs (Enterprise Java Beans).
@@ -53,10 +56,18 @@ This is the usage of template method pattern of Spring. But take a look of how c
 
 
 
-How it Works ?
+How it works?
 --------------
 
 Spring can be considered as 
 1) <b>POJOe</b> (Plain Old Java Object). 
 2) <b>HashMap - ApplicationContext</b> - is the configured application container where all the application depedencies wired up at it.
 3) Can also be used as <b>Registry</b>
+
+
+Why Spring?
+------------
+Spring was developed to make existing tasks easier.
+Before it we used some design patterns from <b>JEE Blueprints</b> that helped us write better code and establish repeatable processes these blueprints helped to establish consistent way of doing things but still made code brittle and untestable. We need often need to change the images, urls and some configurations but due to tight coupled code it could not be possible to do so, this problem called as <b>WORA (Write once and Run Anywhere)</b>.
+We want actual implementation not hardcoded inside application. 
+This is what Spring Framework will help us to do. 
