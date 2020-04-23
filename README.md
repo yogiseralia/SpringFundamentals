@@ -88,3 +88,43 @@ Why configuration is bad? because
 
 Now we will use Spring to do configurations with three approach using demo -
 ![Configuration](media/configuration.png) 
+
+
+
+1- Spring Configuration Using Java
+-------------------------------
+
+Some People don't like mixing xml and source code together for configuration. We will take the smaple app wired up with Java and do 
+
+Key points- 
+
+<b>No applicationContext.xml</b> - but we still have context just not configured in XML. Earlier there was <b>too much XML</b> code in place that people thought to be XML developer not a Java developer. Then <b>Namespace</b> helped a bit but developers wanted less or no XML.
+then Java configuration was introduced and now at latest everything is available in Java in terms of configuration.
+
+
+@Configuration
+--------------
+
+applicationContext is replaced by <b>@Configuration</b>
+
+<b>@Configuration</b> is applied at class level
+
+Spring Bean is defined by <b>@Bean</b> 
+
+<b>@Bean</b> is applied at method level
+
+For e.g. - 
+
+```
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+
+    @Bean(name = "speakerService")
+    public SpeakerService getSpeakerService(){
+        return new SpeakerServiceImpl();
+    }
+}
+```
