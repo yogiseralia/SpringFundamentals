@@ -154,6 +154,7 @@ public class AppConfig {
     @Bean(name = "speakerService")
     public SpeakerService getSpeakerService() {
         SpeakerServiceImpl speakerService = new SpeakerServiceImpl();
+        // using setter method to resolve dependency
         speakerService.setSpeakerRepository(getSpeakerRepository());
         return speakerService;
     }
