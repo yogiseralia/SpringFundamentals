@@ -271,3 +271,108 @@ public class Application {
 
 
 Here is the full source code of this app - **[SOURCE CODE](https://github.com/yogiseralia/SpringDemoConferenceApp-JavaCofig)** 
+
+
+
+Scopes
+---
+
+5 Scopes
+
+Valid in any configuration
+ - Singleton
+ - Prototype
+ 
+Valid only in web-aware Spring prokects
+ - Request
+ - Session
+ - Global
+ 
+ 
+ 
+ **SINGLETON SCOPE** 
+ 1) One instantiation - one instance per 
+ 2) Default Bean Scope
+ 3) Single Instance per Spring Container or ApplicationContext
+ 
+ For e.g. - 
+ 
+  ````java
+ @Scope("singleton")
+//or @Service("speakerService")
+ @Service(BeanDefinition.SCOPE_SINGLETON)
+ public class SpeakerServiceImpl implements SpeakerService {
+ }
+ ````
+
+or 
+
+Add @scope in AppConfig
+
+````java
+ @Configuration
+ public class AppConfig {
+
+    @Bean(name = "speakerService")
+    @Scope(scopeName = BeanDefinition.SCOPE_SINGLETON)
+    public SpeakerService getSpeakerService() {
+        return new SpeakerServiceImpl(getSpeakerRepository());
+    }
+
+    @Bean(name = "speakerRepository")
+    public SpeakerRepository getSpeakerRepository() {
+        return new HibernateSpeakerRepositoryImpl();
+    }
+ }
+````
+ 
+ Singleton - Java Config 
+ 
+ @Scope - requires AOP jar
+ 
+ 
+ 
+ **PROTOTYPE SCOPE**
+ 
+ 1) Per request - a new instance created
+ 2) Guaranteed Unique instance
+ 3) Opposite of Singleton
+ 
+ 
+ For e.g. -
+ 
+ ````java
+ @Service(value = "speakerRepository")
+ @Scope(scopeName = BeanDefinition.SCOPE_PROTOTYPE)
+ public class HibernateSpeakerRepositoryImpl implements SpeakerRepository {
+ }
+````
+
+or 
+
+Add @Scope to AppConfig
+
+````java
+ @Configuration
+ public class AppConfig {
+ 
+     @Bean(name = "speakerService")
+     @Scope(scopeName = BeanDefinition.SCOPE_SINGLETON)
+     public SpeakerService getSpeakerService() {
+         return new SpeakerServiceImpl(getSpeakerRepository());
+     }
+
+     @Bean(name = "speakerRepository")
+     @Scope(scopeName = BeanDefinition.SCOPE_PROTOTYPE)
+     public SpeakerRepository getSpeakerRepository() {
+         return new HibernateSpeakerRepositoryImpl();
+     }
+ }
+````
+
+
+**WEB SCOPES**  --- Covered in Spring MVC
+
+- Request - which returns a bean per http request.
+- Session - which returns a bean per http session. that lives as session is alive.
+- Global Session - which returns a bean per application. its like singleton, kills when server reboot.
