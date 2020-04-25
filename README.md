@@ -376,3 +376,102 @@ Add @Scope to AppConfig
 - Request - which returns a bean per http request.
 - Session - which returns a bean per http session. that lives as session is alive.
 - Global Session - which returns a bean per application. its like singleton, kills when server reboot.
+
+<br>
+<br>
+<br>
+ 
+2-Autowired
+===========
+
+It is Convention over configuration.
+
+Add a component scan to our configuration file by 
+
+@ComponentScan({"com.demo"}) - this is package where componentscan will be looking for autowired annotations
+
+to use autowiring a bean should be annotated by @Autowired 
+
+You can choose by Bean Name or Instance Type. 
+
+
+**DEMO:-**
+
+Here go to ``SpeaakerServiceImpl`` and add a default connstructor with logs showing it has been called.
+same add a log in setter method. Now add ``@AutoWired`` on setRepository() setter method
+
+````java
+
+@Service("SpeakerService")
+public class SpeakerServiceImpl implements SpeakerService {
+
+    private SpeakerRepository speakerRepository;
+
+    public SpeakerServiceImpl(){
+        System.out.println("SpeakerServiceImpl no args constr. called");
+    }
+
+    // added to perform constructor injection
+    public SpeakerServiceImpl(SpeakerRepository speakerRepository){
+        System.out.println("SpeakerServiceImpl one args constr. called");
+        this.speakerRepository = speakerRepository;
+    }
+
+    @Override
+    public List<Speaker> findAll() {
+        return speakerRepository.findAll();
+    }
+
+    @Autowired
+    public void setSpeakerRepository(SpeakerRepository speakerRepository) {
+        System.out.println("SpeakerServiceImpl setter called");
+        this.speakerRepository = speakerRepository;
+    }
+}
+
+````
+
+with AppConfig with code - 
+
+````java
+@Configuration
+public class AppConfig {
+
+    @Bean(name = "speakerService")
+    @Scope(scopeName = BeanDefinition.SCOPE_SINGLETON)
+    public SpeakerService getSpeakerService() {
+        SpeakerServiceImpl speakerService = new SpeakerServiceImpl();
+        return speakerService;
+    }
+
+    @Bean(name = "speakerRepository")
+    public SpeakerRepository getSpeakerRepository() {
+        return new HibernateSpeakerRepositoryImpl();
+    }
+}
+````
+
+And the logs you can see as - 
+
+````text
+SpeakerServiceImpl no args constr. called
+SpeakerServiceImpl setter called
+[Speaker{firstName='Yogesh', 
+````
+
+This was a hybrid implementation of Autowiring. But what if we do for whole app?
+Will see next section for this.  
+See [SOURCE CODE Commit](https://github.com/yogiseralia/SpringDemoConferenceApp-JavaCofig/commit/02027bd6e087971b3af53bc8960dc92ca7b459e7) for this
+
+SteroTypes Annotations
+----------------------
+
+To remove the bean definition in AppConfig lets use Seterotype Annotations.
+
+1) @Component
+2) @Repository 
+3) @Service - it's not a webservice or microservice rather it's a class where you put business logic.
+4) @Controller - Out of Scope of this doc right now.
+
+will make changes to [project](https://github.com/yogiseralia/SpringDemoConferenceApp-JavaCofig) for this.
+
